@@ -216,10 +216,10 @@ func (p *GitLabProvider) getGroupProject(ctx context.Context, gl *gitlab.Client,
 
 	if len(groupAndSubGroupPaths) > 1 {
 		lastSubGroup := groupAndSubGroupPaths[len(groupAndSubGroupPaths)-1]
-		ldgo := &gitlab.ListDescendantGroupsOptions{
+		ldgo := &gitlab.ListSubgroupsOptions{
 			Search: gitlab.String(lastSubGroup),
 		}
-		subGroups, _, err := gl.Groups.ListDescendantGroups(*gid, ldgo, gitlab.WithContext(ctx))
+		subGroups, _, err := gl.Groups.ListSubgroups(*gid, ldgo, gitlab.WithContext(ctx))
 		if err != nil {
 			return nil, nil, fmt.Errorf("failed to list subgroups, error: %w", err)
 		}
